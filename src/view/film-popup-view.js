@@ -9,10 +9,10 @@ const renderFilmDetails = (name, value) => (
 </tr>`
 );
 
-const renderGenreItem = (ar) => {
-  if (ar.length > 0) {
+const renderGenreItem = (elements) => {
+  if (elements.length > 0) {
     const box = [];
-    for (const item of ar)
+    for (const item of elements)
     {box.push(`<span class="film-details__genre">${item}</span>`);}
     return box;
   }

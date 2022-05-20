@@ -1,4 +1,13 @@
 import dayjs from 'dayjs';
+import {
+  createIdGenerator,
+  generateBoolean,
+  generateDate,
+  getAnyRandomNumber,
+  getArrayRandomLength,
+  getOneRandomArrayElem,
+  getRandomInteger
+} from '../utils.js';
 
 const FILM_TITLES = [
   'Made for each other',
@@ -18,7 +27,7 @@ const FILM_POSTERS = ['images/posters/made-for-each-other.png',
   'images/posters/the-great-flamarion.jpg',
   'images/posters/the-man-with-the-golden-arm.jpg',];
 
-const DESCRIPTION = [
+const DESCRIPTIONS = [
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
   'Cras aliquet varius magna, non porta ligula feugiat eget.',
   'Fusce tristique felis at fermentum pharetra.',
@@ -32,122 +41,114 @@ const DESCRIPTION = [
   'In rutrum ac purus sit amet tempus.',
 ];
 
-const COMMENTS_ARRAY = [
+const EMOTIONS = ['angry', 'puke', 'sleeping', 'smile'];
 
-  {
-    'id': '1',
-    'author': 'Ilya O\'Reilly',
-    'comment': 'a film that changed my life, a true masterpiece, post-credit scene was just amazing omg.',
-    'date': '2019-05-11T16:12:32.554Z',
-    'emotion': 'smile'
-  },
-  {
-    'id': '2',
-    'author': 'Ilya O\'Reilly',
-    'comment': 'Very very old. Meh',
-    'date': '2019-05-11T16:12:32.554Z',
-    'emotion': 'puke'
-  },
-  {
-    'id': '3',
-    'author': 'Ilya O\'Reilly',
-    'comment': 'Almost two hours? Seriously?',
-    'date': '2019-05-11T16:12:32.554Z',
-    'emotion': 'angry'
-  },
-  {
-    'id': '4',
-    'author': 'Ilya O\'Reilly',
-    'comment': 'a film that changed my life, a true masterpiece, post-credit scene was just amazing omg.',
-    'date': '2019-05-11T16:12:32.554Z',
-    'emotion': 'smile'
-  },
-  {
-    'id': '42',
-    'author': 'Ilya O\'Reilly',
-    'comment': 'Booooooooooring',
-    'date': '2019-05-11T16:12:32.554Z',
-    'emotion': 'sleeping'
-  },
+const COMMENT_AUTHORS = [
+  'Leonardo',
+  'Raphael',
+  'Donatello',
+  'Michelangelo',
+];
+
+const COMMENTS = [
+  'A film that changed my life, a true masterpiece, post-credit scene was just amazing omg.',
+  'A true masterpiece.',
+  'Post-credit scene was just amazing omg.',
+  'A true masterpiece, post-credit scene was just amazing omg.',
 ];
 
 const GENRES = ['Action','Comedy','Drama','Fantasy','Horror'];
 
-const getRandomInteger = (a = 0, b = 1) => {
-  const lower = Math.ceil(Math.min(a, b));
-  const upper = Math.floor(Math.max(a, b));
+const AGE_RATINGS = ['6+', '12+', '14+', '16+', '18+'];
 
-  return Math.floor(lower + Math.random() * (upper - lower + 1));
-};
+const COUNTRIES = [
+  'Finland',
+  'USA',
+  'Canada',
+  'French',
+  'Germany',
+  'Australia',
+];
 
-const getAnyRandomNumber = (min, max, afterPoint) => {
-  const lower = Math.min(Math.abs(min), Math.abs(max));
-  const upper = Math.max(Math.abs(min), Math.abs(max));
-  const result = (Math.random() * (upper - lower) + lower).toFixed(afterPoint);
-  return Number(result);
-};
+const DIRECTORS = [
+  'John Cromwell',
+  'Otto Preminger',
+  'Max Fleischer',
+  'Armand Schaefer',
+  'Anthony Mann',
+];
+const WRITERS = [
+  'Joe Swerling',
+  'Adolph Zukor',
+  'Lindsley Parsons',
+  'Anne Wiston',
+  'Benjamin Glazer',
+];
+const ACTORS = [
+  'James Stewart',
+  'Carole Lombard',
+  'Charles Coburn',
+  'Frank Sinatra',
+  'Eleanor Parker',
+  'Kim Novak',
+  'Erich Von Stroheim',
+  'Mary Beth Hughes',
+  'Hal Skelly',
+  'Nancy Carroll',
+];
 
-const getArrayRandomLength = (arr) => {
-  const copyArray = arr.slice();
-  copyArray.length = getRandomInteger(1, 5);
-  return copyArray;
-};
+const MIN_TIME = 0;
+const MAX_TIME = 200;
 
-const createIdGenerator = () => {
-  let lastGeneratedId = 0;
+const MIN_RATING = 0;
+const MAX_RATING = 10;
+const NUMB_AFT_POINT = 1;
 
-  return function () {
-    lastGeneratedId += 1;
-    return lastGeneratedId;
-  };
-};
+const MIN_COMMENTS = 1;
+const MAX_COMMENTS = 5;
+
+const getFilmRating = () => getAnyRandomNumber(MIN_RATING, MAX_RATING, NUMB_AFT_POINT);
 
 const generateFilmId = createIdGenerator();
+const generateCommentId = createIdGenerator();
 
-const getCommentId = () => {
-  const copyArray = COMMENTS_ARRAY.slice();
-  copyArray.length = getRandomInteger(0, 5);
+export const generateComment = () => ({
+  id: generateCommentId(),
+  author: getOneRandomArrayElem(COMMENT_AUTHORS),
+  comment: getOneRandomArrayElem(COMMENTS),
+  date: generateDate(),
+  emotion: getOneRandomArrayElem(EMOTIONS),
+});
 
-  return copyArray.map(({id}) => id);
+const comments = Array.from({length: getAnyRandomNumber(MIN_COMMENTS, MAX_COMMENTS)}, generateComment);
+
+const getCommentsId = () => {
+  const copyComments = comments.slice();
+  copyComments.length = getRandomInteger(MIN_COMMENTS, MAX_COMMENTS);
+
+  return copyComments.map(({id}) => id);
 };
-
-const generateBoolean = () => Boolean(getRandomInteger(0, 1));
-
-const generateDate = () => {
-  const maxYearsGap = 7;
-  const yearsGap = getRandomInteger(-maxYearsGap, 0);
-
-  return dayjs().add(yearsGap, 'year').toDate();
-};
-
-const getTitle = (titles) => titles[getRandomInteger(0, titles.length - 1)];
-const getFilmPoster = (posters) => posters[getRandomInteger(0, posters.length - 1)];
-
 
 export const generateFilm = () => (
   {
     'id': generateFilmId().toString(),
-    'comments': getCommentId(),
+    'comments': getCommentsId(),
     'filmInfo': {
-      'title': getTitle(FILM_TITLES),
-      'alternativeTitle': getTitle(FILM_TITLES),
-      'totalRating': getAnyRandomNumber(0,10,1),
-      'poster': getFilmPoster(FILM_POSTERS),
-      'ageRating': 18,
-      'director': 'Tom Ford',
-      'writers': [
-        'Takeshi Kitano'
-      ],
-      'actors': [
-        'Morgan Freeman'
-      ],
+      'title': getOneRandomArrayElem(FILM_TITLES),
+      'alternativeTitle': getOneRandomArrayElem(FILM_TITLES),
+      'totalRating': getFilmRating(),
+      'poster': getOneRandomArrayElem(FILM_POSTERS),
+      'ageRating': getOneRandomArrayElem(AGE_RATINGS),
+      'director': getOneRandomArrayElem(DIRECTORS),
+      'writers': getArrayRandomLength(WRITERS),
+      'actors': getArrayRandomLength(ACTORS),
       'release': {
         'date': generateDate(),
-        'releaseCountry': 'Finland'
+        'releaseCountry': getOneRandomArrayElem(COUNTRIES)
       },
-      'runtime': getRandomInteger(0, 200),
+      'runtime': getRandomInteger(MIN_TIME, MAX_TIME),
       'genres': getArrayRandomLength(GENRES),
-      'description': getArrayRandomLength(DESCRIPTION).join(''),
+      'description': getOneRandomArrayElem(DESCRIPTIONS),
     },
     'userDetails': {
       'watchlist': generateBoolean(),
@@ -158,4 +159,4 @@ export const generateFilm = () => (
   }
 );
 
-export {COMMENTS_ARRAY};
+export {comments};

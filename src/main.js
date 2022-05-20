@@ -5,7 +5,7 @@ import {createShowMoreButtonTemplate} from './view/more-button-view.js';
 import {createFilmsExtraTemplate} from './view/films-extra-view.js';
 import {createPopupTemplate} from './view/film-popup-view.js';
 import {RenderPosition} from './render.js';
-import {COMMENTS_ARRAY, generateFilm} from './mock/structures.js';
+import {comments, generateFilm} from './mock/structures.js';
 import {createFilter} from './filter.js';
 import {renderTemplate} from './render.js';
 import {createSort} from './view/sort-view.js';
@@ -65,7 +65,7 @@ if (films.length > FILM_CARD_COUNT) {
 renderTemplate(siteFooterElement, createFooterFilmsCount(films.length), RenderPosition.BEFOREEND);
 
 //Вставил попап
-renderTemplate(siteBodyElement, createPopupTemplate(films[0], COMMENTS_ARRAY), RenderPosition.BEFOREEND);
+renderTemplate(siteBodyElement, createPopupTemplate(films[0], comments), RenderPosition.BEFOREEND);
 
 //Карточки в категории
 
