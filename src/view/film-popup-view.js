@@ -11,12 +11,29 @@ const renderFilmDetails = (name, value) => (
 
 const renderGenreItem = (elements) => {
   if (elements.length > 0) {
-    const box = [];
-    for (const item of elements)
-    {box.push(`<span class="film-details__genre">${item}</span>`);}
-    return box;
+    elements.map((item) => `<span class="film-details__genre">${item}</span>`).join(', ');
+  }
+}; //в попап отрисовывается Genre	undefined?
+
+/*
+const createCommentTemplate = (commentId, comments) => {
+  if (commentId.includes(element.id)) {
+    comments.map((element) => `<li class="film-details__comment">
+        <span class="film-details__comment-emoji">
+          <img src="./images/emoji/${element.emotion}.png" width="55" height="55" alt="emoji-${element.emotion}">
+        </span>
+          <div>
+            <p class="film-details__comment-text">${element.comment}</p>
+            <p class="film-details__comment-info">
+              <span class="film-details__comment-author">${element.author}</span>
+              <span class="film-details__comment-day">${getDate(element.date, 'YYYY/MM/DD HH:mm')}</span>
+              <button class="film-details__comment-delete">Delete</button>
+            </p>
+          </div>
+      </li>`);
   }
 };
+*/
 
 const createCommentTemplate = (commentId, comments) => {
   const commentBox = [];
@@ -24,18 +41,15 @@ const createCommentTemplate = (commentId, comments) => {
   for (const element of comments) {
     if (commentId.includes(element.id)) {
 
-      const {author, comment, date, emotion} = element;
-      const formatedDate = getDate(date, 'YYYY/MM/DD HH:mm');
-
       commentBox.push(`<li class="film-details__comment">
         <span class="film-details__comment-emoji">
-          <img src="./images/emoji/${emotion}.png" width="55" height="55" alt="emoji-${emotion}">
+          <img src="./images/emoji/${element.emotion}.png" width="55" height="55" alt="emoji-${element.emotion}">
         </span>
           <div>
-            <p class="film-details__comment-text">${comment}</p>
+            <p class="film-details__comment-text">${element.comment}</p>
             <p class="film-details__comment-info">
-              <span class="film-details__comment-author">${author}</span>
-              <span class="film-details__comment-day">${formatedDate}</span>
+              <span class="film-details__comment-author">${element.author}</span>
+              <span class="film-details__comment-day">${getDate(element.date, 'YYYY/MM/DD HH:mm')}</span>
               <button class="film-details__comment-delete">Delete</button>
             </p>
           </div>
@@ -92,7 +106,7 @@ export const createPopupTemplate = (film, comments) => {
             ${renderFilmDetails('Release Date', dateFormat)}
             ${renderFilmDetails('Runtime', getTime())}
             ${renderFilmDetails('Country', country)}
-            ${renderFilmDetails(getCorrectWord(genres, 'Genre'), renderGenreItem(genres).join(' '))}
+            ${renderFilmDetails(getCorrectWord(genres, 'Genre'), renderGenreItem(genres))}
           </table>
           <p class="film-details__film-description">
              ${description}

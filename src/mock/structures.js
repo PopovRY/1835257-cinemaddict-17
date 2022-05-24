@@ -57,7 +57,7 @@ const COMMENTS = [
   'A true masterpiece, post-credit scene was just amazing omg.',
 ];
 
-const GENRES = ['Action','Comedy','Drama','Fantasy','Horror'];
+const GENRES = ['Action', 'Comedy', 'Drama', 'Fantasy', 'Horror'];
 
 const AGE_RATINGS = ['6+', '12+', '14+', '16+', '18+'];
 
