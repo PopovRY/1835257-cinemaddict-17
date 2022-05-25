@@ -31,4 +31,8 @@ const render = (component, container, place = RenderPosition.BEFOREEND) => {
   }
 };
 
-export {RenderPosition, createElement, render};
+const renderTemplate = (container, template, place) => {
+  container.insertAdjacentHTML(place, template);
+};
+
+export {RenderPosition, createElement, render, renderTemplate};
