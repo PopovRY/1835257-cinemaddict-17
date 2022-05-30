@@ -1,10 +1,10 @@
 import {createElement} from '../render.js';
 
-const createFilmsTemplate = () => (
-  '<section class="films"></section>'
+const createMainNavigation = () => (
+  '<nav class="main-navigation"></nav>'
 );
 
-export default class FilmsSectionView {
+export default class MainNavigationMenuView {
   #element = null;
 
   get element() {
@@ -16,7 +16,7 @@ export default class FilmsSectionView {
   }
 
   get template(){
-    return createFilmsTemplate();
+    return createMainNavigation();
   }
 
   removeElement() {
