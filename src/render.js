@@ -12,9 +12,7 @@ const createElement = (template) => {
   return newElement.firstElementChild;
 };
 
-const render = (component, container, place = RenderPosition.BEFOREEND) => {
-  const element = component.getElement();
-
+const render = (container, element, place) => {
   switch (place) {
     case RenderPosition.BEFOREBEGIN:
       container.before(element);
