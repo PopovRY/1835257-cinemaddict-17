@@ -1,5 +1,4 @@
 import UserProfileView from './view/user-rank-view.js';
-import MainNavigationMenuView from './view/main-navigation-menu-view.js';
 import FilmCardView from './view/film-card-view.js';
 import ShowMoreButtonView from './view/more-button-view.js';
 import FilmPopupView from './view/film-popup-view.js';
@@ -30,9 +29,7 @@ const siteFooterElement = document.querySelector('footer');
 render(siteHeaderElement, new UserProfileView().element, RenderPosition.BEFOREEND);
 
 //Вставил меню
-const menuComponent = new MainNavigationMenuView();
-render(siteMainElement, menuComponent.element,RenderPosition.BEFOREEND);
-render(menuComponent.element, new MainNavigationItemView(filter).element, RenderPosition.BEFOREEND);
+render(siteMainElement, new MainNavigationItemView(filter).element, RenderPosition.BEFOREEND);
 
 //Вставил фильтры
 render(siteMainElement, new SortView().element, RenderPosition.BEFOREEND);
@@ -77,7 +74,7 @@ const renderFilmList = (container, filmsArray) => {
   const filmComponent = new FilmsSectionView();
   render(container, filmComponent.element, RenderPosition.BEFOREEND);
 
-  const filmListComponent = new FilmListView();
+  const filmListComponent = new FilmListView(filmsArray);
   render(filmComponent.element, filmListComponent.element, RenderPosition.BEFOREEND);
   const filmContainerComponent = new FilmsListContainer();
   render(filmListComponent.element, filmContainerComponent.element, RenderPosition.BEFOREEND);
