@@ -1,20 +1,15 @@
 import UserProfileView from './view/user-profile-view.js';
-import FilmCardView from './view/film-card-view.js';
-import ShowMoreButtonView from './view/more-button-view.js';
-import FilmPopupView from './view/film-popup-view.js';
+
 import {comments, generateFilm} from './mock/structures.js';
 import {createFilter} from './filter.js';
 import SortView from './view/sort-view.js';
 import FilmsCountView from './view/films-count-view.js';
-import FilmListView from './view/film-list-view.js';
-import MainNavigationItemView from './view/main-navigation-item-view.js';
-import FilmsSectionView from './view/films-section-view';
-import FilmsListContainer from './view/films-list-container';
-import FilmsListExtraView from './view/films-list-extra-view';
-import FilmTopView from './view/film-top-view';
-import {remove, render} from './framework/render.js';
 
-const FILM_CARD_COUNT = 5;
+import MainNavigationItemView from './view/main-navigation-item-view.js';
+
+import {render} from './framework/render.js';
+
+export const FILM_CARD_COUNT = 5;
 const FILM_COUNT = 20;
 
 const films = Array.from({length: FILM_COUNT}, generateFilm);
@@ -22,7 +17,6 @@ const filter = createFilter(films);
 
 const siteHeaderElement = document.querySelector('.header');
 const siteMainElement = document.querySelector('.main');
-const siteBodyElement = document.querySelector('body');
 const siteFooterElement = document.querySelector('footer');
 
 //Вставил профиль
@@ -31,13 +25,12 @@ render(new UserProfileView(), siteHeaderElement);
 //Вставил меню
 render(new MainNavigationItemView(filter), siteMainElement);
 
-//Вставил фильтры
-render(new SortView(), siteMainElement);
-
 //Количество фильмов
 render(new FilmsCountView(films.length), siteFooterElement);
 
+/*
 //Вставил карточки
+
 
 const renderFilm = (filmsListElement, elements) => {
   const filmCardComponent = new FilmCardView(elements);
@@ -118,3 +111,6 @@ const renderFilmList = (container, elements) => {
 };
 
 renderFilmList(siteMainElement, films);
+
+ */
+
