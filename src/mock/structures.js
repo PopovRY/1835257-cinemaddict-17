@@ -8,6 +8,7 @@ import {
   getOneRandomArrayElem,
   getRandomInteger
 } from '../utils.js';
+import {nanoid} from 'nanoid';
 
 const FILM_TITLES = [
   'Made for each other',
@@ -109,7 +110,7 @@ const MAX_COMMENTS = 5;
 
 const getFilmRating = () => getAnyRandomNumber(MIN_RATING, MAX_RATING, NUMB_AFT_POINT);
 
-const generateFilmId = createIdGenerator();
+//const generateFilmId = createIdGenerator();
 const generateCommentId = createIdGenerator();
 
 export const generateComment = () => ({
@@ -131,7 +132,7 @@ const getCommentsId = () => {
 
 export const generateFilm = () => (
   {
-    'id': generateFilmId().toString(),
+    'id': nanoid(),
     'comments': getCommentsId(),
     'filmInfo': {
       'title': getOneRandomArrayElem(FILM_TITLES),

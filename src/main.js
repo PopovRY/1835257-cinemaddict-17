@@ -8,6 +8,7 @@ import FilmsCountView from './view/films-count-view.js';
 import MainNavigationItemView from './view/main-navigation-item-view.js';
 
 import {render} from './framework/render.js';
+import MovieListPresenter from './presenter/movie-list-presenter.js';
 
 export const FILM_CARD_COUNT = 5;
 const FILM_COUNT = 20;
@@ -114,3 +115,5 @@ renderFilmList(siteMainElement, films);
 
  */
 
+const movieListPresenter = new MovieListPresenter(siteMainElement);
+movieListPresenter.init(films);
