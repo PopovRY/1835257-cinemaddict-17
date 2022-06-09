@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import {remove} from './framework/render.js';
 
 const MAX_YEARS_GAP = 7;
 
@@ -44,4 +45,32 @@ const createIdGenerator = () => {
   };
 };
 
-export {getDate, getCorrectWord, getRandomInteger, getAnyRandomNumber, getArrayRandomLength, generateDate, getOneRandomArrayElem, generateBoolean, createIdGenerator};
+const onEscKeyDown = (evt, component, element) => {
+  if (evt.key === 'Escape' || evt.key === 'Esc') {
+    evt.preventDefault();
+    remove(component);
+    element.classList.remove('hide-overflow');
+    document.removeEventListener('keydown', onEscKeyDown);
+  }
+};
+
+const updateItem = (items, update) => {
+  const index = items.findIndex((item) => item.id === update.id);
+
+  if (index === -1) {
+    return items;
+  }
+
+  return [
+    ...items.slice(0, index),
+    update,
+    ...items.slice(index + 1),
+  ];
+};
+
+const sortByDate = (filmA, filmB) => getDate(filmB.filmInfo.release.date, 'YYYY') - getDate(filmA.filmInfo.release.date, 'YYYY');
+
+const sortByRating = (filmA, filmB) => filmB.filmInfo.totalRating - filmA.filmInfo.totalRating;
+
+
+export {getDate, getCorrectWord, getRandomInteger, getAnyRandomNumber, getArrayRandomLength, generateDate, getOneRandomArrayElem, generateBoolean, createIdGenerator, onEscKeyDown, updateItem, sortByDate, sortByRating};
