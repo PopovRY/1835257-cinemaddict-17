@@ -1,8 +1,7 @@
 import UserProfileView from './view/user-profile-view.js';
 
-import {comments, generateFilm} from './mock/structures.js';
+import {generateFilm} from './mock/structures.js';
 import {createFilter} from './filter.js';
-import SortView from './view/sort-view.js';
 import FilmsCountView from './view/films-count-view.js';
 
 import MainNavigationItemView from './view/main-navigation-item-view.js';

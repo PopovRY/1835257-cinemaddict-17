@@ -40,12 +40,12 @@ export default class MovieListPresenter {
 
     render(this.#sortComponent, this.#container);
     render(this.#filmComponent, this.#container);
-    render(this.#filmListComponent, this.#filmComponent);
-    render(this.#filmContainerComponent, this.#filmListComponent,);
+    render(this.#filmListComponent, document.querySelector('.films'));
+    render(this.#filmContainerComponent, document.querySelector('.films-list'));
     this.#renderFilmList(this.#films);
     this.#renderShowMoreButton();
     this.#renderHeadingFilmList();
-    this.#renderExtra();
+    //this.#renderExtra();
   };
 
   #renderFilm = (films) => {
@@ -76,12 +76,12 @@ export default class MovieListPresenter {
       document.removeEventListener('keydown', onEscKeyDown);
     });
 
-    render(filmCardComponent, this.#filmContainerComponent);
+    render(filmCardComponent, document.querySelector('.films-list__container'));
   };
 
   #renderHeadingFilmList= () => {
     const headingFilmListComponent = new HeadingFilmList(this.#films);
-    render(headingFilmListComponent, this.#filmListComponent);
+    render(headingFilmListComponent, document.querySelector('.films-list'));
   };
 
   #renderFilmList = (films) => {
@@ -92,7 +92,7 @@ export default class MovieListPresenter {
   };
 
   #renderShowMoreButton = () => {
-    render(this.#showMoreButtonComponent, this.#filmListComponent);
+    render(this.#showMoreButtonComponent, document.querySelector('.films-list'));
 
     this.#showMoreButtonComponent.setClickHandlerMoreBtn(this.#handleShowMoreButtonClick);
   };
@@ -119,12 +119,12 @@ export default class MovieListPresenter {
       this.#renderShowMoreButton();
     }
   };
-
+/*
   #renderExtra = () => {
-    render(this.#filmsListExtraTopComponent, this.#filmComponent,);
+    render(this.#filmsListExtraTopComponent, document.querySelector('.films'));
     render(this.#filmTopRateComponent, this.#filmsListExtraTopComponent);
 
-    render(this.#filmsListExtraCommentedComponent, this.#filmComponent);
+    render(this.#filmsListExtraCommentedComponent, document.querySelector('.films'));
     render(this.#filmMostCommentedComponent, this.#filmsListExtraCommentedComponent);
 
     for (const film of this.#films.slice(0, 2)) {
@@ -132,5 +132,7 @@ export default class MovieListPresenter {
       this.#renderFilm(this.#filmMostCommentedComponent, film);
     }
   };
+
+ */
 }
 
