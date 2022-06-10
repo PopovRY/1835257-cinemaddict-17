@@ -3,3 +3,5 @@ export const SortType = {
   BY_DATE: 'by-date',
   BY_RATING: 'by-rating',
 };
+
+export const FILM_COUNT = 20;

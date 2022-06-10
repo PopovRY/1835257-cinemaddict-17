@@ -4,8 +4,6 @@ import {comments} from '../mock/structures.js';
 import {remove, render, replace} from '../framework/render.js';
 import {onEscKeyDown} from '../utils.js';
 
-const siteBodyElement = document.querySelector('body');
-
 export default class MoviePresenter {
   #film = null;
   #filmCardComponent = null;
@@ -40,7 +38,7 @@ export default class MoviePresenter {
     this.#popupComponent.setPopupFavoriteClickHandler(this.#handleFavoriteClick);
 
     if (prevFilmCardComponent === null || prevPopupComponent === null) {
-      render(this.#filmContainer, this.#filmCardComponent);
+      render(this.#filmCardComponent, this.#filmContainer, );
       return;
     }
 
@@ -62,7 +60,7 @@ export default class MoviePresenter {
   };
 
   #openPopup = () => {
-    render(this.#filmContainer, this.#popupComponent);
+    render(this.#popupComponent, this.#filmContainer);
     document.addEventListener('keydown', (evt) => {
       onEscKeyDown(evt, this.#popupComponent, this.#filmContainer);
     });

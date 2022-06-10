@@ -15,6 +15,7 @@ import {SortType} from '../const.js';
 
 export default class MovieListPresenter {
   #container = null;
+  #filmsModel = null;
 
   #sortComponent = new SortView();
   #filmComponent = new FilmsSectionView();
@@ -33,13 +34,14 @@ export default class MovieListPresenter {
   #sourcedFilms = [];
   #renderedFilmCount = FILM_CARD_COUNT;
 
-  constructor(container) {
+  constructor(container, filmsModel) {
     this.#container = container;
+    this.#filmsModel = filmsModel;
   }
 
-  init = (films) => {
-    this.#films = [...films];
-    this.#sourcedFilms = [...films];
+  init = () => {
+    this.#films = [...this.#filmsModel.films];
+    this.#sourcedFilms = [...this.#filmsModel.films];
 
     render(this.#sortComponent, this.#container);
     render(this.#filmComponent, this.#container);
