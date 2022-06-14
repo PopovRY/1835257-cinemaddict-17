@@ -9,6 +9,7 @@ import {
   getRandomInteger
 } from '../utils.js';
 import {nanoid} from 'nanoid';
+import {EMOJIS} from '../const.js';
 
 const FILM_TITLES = [
   'Made for each other',
@@ -42,7 +43,6 @@ const DESCRIPTIONS = [
   'In rutrum ac purus sit amet tempus.',
 ];
 
-const EMOTIONS = ['angry', 'puke', 'sleeping', 'smile'];
 
 const COMMENT_AUTHORS = [
   'Leonardo',
@@ -118,7 +118,7 @@ export const generateComment = () => ({
   author: getOneRandomArrayElem(COMMENT_AUTHORS),
   comment: getOneRandomArrayElem(COMMENTS),
   date: generateDate(),
-  emotion: getOneRandomArrayElem(EMOTIONS),
+  emotion: getOneRandomArrayElem(EMOJIS),
 });
 
 const comments = Array.from({length: getAnyRandomNumber(MIN_COMMENTS, MAX_COMMENTS)}, generateComment);
