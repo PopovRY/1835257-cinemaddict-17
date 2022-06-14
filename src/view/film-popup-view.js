@@ -176,7 +176,7 @@ export default class FilmPopupView extends AbstractStatefulView {
     this.element.querySelector('.film-details__comment-input').textContent = evt.target.value;
     this._setState({
       comment: evt.target.value,
-    }, true);
+    });
   };
 
   setPopupWatchlistClickHandler = (callback) => {
