@@ -58,9 +58,8 @@ const updateItem = (items, update) => {
   ];
 };
 
-const sortByDate = (filmA, filmB) => getDate(filmB.filmInfo.release.date, 'YYYY') - getDate(filmA.filmInfo.release.date, 'YYYY');
+const sortDate = (filmA, filmB) => getDate(filmB.filmInfo.release.date, 'YYYY') - getDate(filmA.filmInfo.release.date, 'YYYY');
 
-const sortByRating = (filmA, filmB) => filmB.filmInfo.totalRating - filmA.filmInfo.totalRating;
+const sortRating = (filmA, filmB) => filmB.filmInfo.totalRating - filmA.filmInfo.totalRating;
 
-
-export {getDate, getCorrectWord, getRandomInteger, getAnyRandomNumber, getArrayRandomLength, generateDate, getOneRandomArrayElem, generateBoolean, createIdGenerator, updateItem, sortByDate, sortByRating};
+export {getDate, getCorrectWord, getRandomInteger, getAnyRandomNumber, getArrayRandomLength, generateDate, getOneRandomArrayElem, generateBoolean, createIdGenerator, updateItem, sortDate, sortRating};

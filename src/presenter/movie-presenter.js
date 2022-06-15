@@ -63,8 +63,7 @@ export default class MoviePresenter {
     document.addEventListener('keydown', this.#handleEscPopupKeyDown);
   };
 
-  #closePopup = (data) => {
-    this.#popupComponent.reset(data);
+  #closePopup = () => {
     remove(this.#popupComponent);
     document.removeEventListener('keydown', this.#handleEscPopupKeyDown);
   };
@@ -72,7 +71,6 @@ export default class MoviePresenter {
   #handleEscPopupKeyDown = (evt) => {
     if (evt.key === 'Escape' || evt.key === 'Esc') {
       evt.preventDefault();
-      this.#popupComponent.reset(this.#film);
       this.#closePopup();
     }
   };

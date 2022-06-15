@@ -1,6 +1,6 @@
 //Подробная информация о фильме (попап)
 
-import {getDate, getCorrectWord} from '../utils.js';
+import {getDate, getCorrectWord} from '../utils/utils.js';
 import AbstractStatefulView from '../framework/view/abstract-stateful-view.js';
 import {EMOJIS} from '../const.js';
 
@@ -34,7 +34,7 @@ const createCommentTemplate = (commentId, comments) => comments.filter((element)
               <button class="film-details__comment-delete">Delete</button>
             </p>
           </div>
-      </li>`).join(', ');
+      </li>`).join(' ');
 
 
 const createNewCommentTemplate = (emojiIcon, checkedEmojiItem, comment) => (
@@ -135,6 +135,7 @@ export default class FilmPopupView extends AbstractStatefulView {
     super();
     this._state = FilmPopupView.parseFilmToState(film);
     this.#comments = comments;
+    this.#setInnerHandlers();
   }
 
   get template(){
@@ -145,6 +146,11 @@ export default class FilmPopupView extends AbstractStatefulView {
     this.updateElement(
       FilmPopupView.parseFilmToState(film),
     );
+  };
+
+  #setInnerHandlers = () => {
+    this.element.querySelector('.film-details__emoji-list').addEventListener('change', this.#emojiItemsClickHandler);
+    this.element.querySelector('.film-details__comment-input').addEventListener('input', this.#descriptionInputHandler);
   };
 
   _restoreHandlers = () => {
@@ -158,11 +164,6 @@ export default class FilmPopupView extends AbstractStatefulView {
   setPopupClickHandler = (callback) => {
     this._callback.popupClick = callback;
     this.element.querySelector('.film-details__close-btn').addEventListener('click', this.#popupClickHandler);
-  };
-
-  #setInnerHandlers = () => {
-    this.element.querySelector('.film-details__emoji-list').addEventListener('change', this.#emojiItemsClickHandler);
-    this.element.querySelector('.film-details__comment-input').addEventListener('input', this.#descriptionInputHandler);
   };
 
   #emojiItemsClickHandler = (evt) => {

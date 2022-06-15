@@ -1,7 +1,7 @@
 export const SortType = {
   DEFAULT: 'default',
-  BY_DATE: 'by-date',
-  BY_RATING: 'by-rating',
+  DATE: 'date',
+  RATING: 'rating',
 };
 
 export const EMOJIS = ['smile', 'sleeping', 'puke', 'angry'];

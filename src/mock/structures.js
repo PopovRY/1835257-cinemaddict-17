@@ -7,7 +7,7 @@ import {
   getArrayRandomLength,
   getOneRandomArrayElem,
   getRandomInteger
-} from '../utils.js';
+} from '../utils/utils.js';
 import {nanoid} from 'nanoid';
 import {EMOJIS} from '../const.js';
 
