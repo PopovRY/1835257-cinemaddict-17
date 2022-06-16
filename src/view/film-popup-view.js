@@ -48,7 +48,7 @@ const createNewCommentTemplate = (emojiIcon, checkedEmojiItem, comment) => (
         ${EMOJIS.map((emoji) => `<input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-${emoji}" value="${emoji}" ${addCheckedProperty(`emoji-${emoji}` === checkedEmojiItem)}>
         <label class="film-details__emoji-label" for="emoji-${emoji}">
           <img src="./images/emoji/${emoji}.png" width="30" height="30" alt="emoji">
-        </label>`).join('')}
+        </label>`).join(' ')}
         </div>
       </div>
     `
@@ -167,6 +167,7 @@ export default class FilmPopupView extends AbstractStatefulView {
   };
 
   #emojiItemsClickHandler = (evt) => {
+    evt.preventDefault();
     this.updateElement({
       emojiIcon: evt.target.value,
       checkedEmojiItem: evt.target.id,
@@ -174,6 +175,7 @@ export default class FilmPopupView extends AbstractStatefulView {
   };
 
   #descriptionInputHandler = (evt) => {
+    evt.preventDefault();
     this.element.querySelector('.film-details__comment-input').textContent = evt.target.value;
     this._setState({
       comment: evt.target.value,

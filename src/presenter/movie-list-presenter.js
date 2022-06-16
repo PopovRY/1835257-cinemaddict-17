@@ -78,8 +78,7 @@ export default class MovieListPresenter {
   };
 
   #renderShowMoreButton = () => {
-    render(this.#showMoreButtonComponent, document.querySelector('.films-list'));
-
+    render(this.#showMoreButtonComponent, this.#filmListComponent.element);
     this.#showMoreButtonComponent.setClickHandlerMoreBtn(this.#handleShowMoreButtonClick);
   };
 
@@ -88,7 +87,7 @@ export default class MovieListPresenter {
     this.#renderedFilmCount += FILM_CARD_COUNT;
 
     if (this.#renderedFilmCount >= this.#films.length) {
-      this.#showMoreButtonComponent.removeElement();
+      remove(this.#showMoreButtonComponent);
     }
 
   };
