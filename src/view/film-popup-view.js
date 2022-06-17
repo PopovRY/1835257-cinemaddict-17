@@ -142,6 +142,9 @@ export default class FilmPopupView extends AbstractStatefulView {
     return createPopupTemplate(this._state, this.#comments);
   }
 
+  get scrollOffset() { return this.element.scrollTop; }
+  set scrollOffset(value) { this.element.scrollTop = value; }
+
   reset = (film) => {
     this.updateElement(
       FilmPopupView.parseFilmToState(film),
@@ -166,9 +169,15 @@ export default class FilmPopupView extends AbstractStatefulView {
     this.element.querySelector('.film-details__close-btn').addEventListener('click', this.#popupClickHandler);
   };
 
+  #getElementUpdated = (update) => {
+    const scrollOffset = this.scrollOffset;
+    this.updateElement(update);
+    this.scrollOffset = scrollOffset;
+  };
+
   #emojiItemsClickHandler = (evt) => {
     evt.preventDefault();
-    this.updateElement({
+    this.#getElementUpdated({
       emojiIcon: evt.target.value,
       checkedEmojiItem: evt.target.id,
     });
