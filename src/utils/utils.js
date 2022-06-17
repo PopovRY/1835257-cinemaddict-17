@@ -1,5 +1,4 @@
 import dayjs from 'dayjs';
-import {remove} from './framework/render.js';
 
 const MAX_YEARS_GAP = 7;
 
@@ -45,15 +44,6 @@ const createIdGenerator = () => {
   };
 };
 
-const onEscKeyDown = (evt, component, element) => {
-  if (evt.key === 'Escape' || evt.key === 'Esc') {
-    evt.preventDefault();
-    remove(component);
-    element.classList.remove('hide-overflow');
-    document.removeEventListener('keydown', onEscKeyDown);
-  }
-};
-
 const updateItem = (items, update) => {
   const index = items.findIndex((item) => item.id === update.id);
 
@@ -68,9 +58,8 @@ const updateItem = (items, update) => {
   ];
 };
 
-const sortByDate = (filmA, filmB) => getDate(filmB.filmInfo.release.date, 'YYYY') - getDate(filmA.filmInfo.release.date, 'YYYY');
+const sortDate = (filmA, filmB) => getDate(filmB.filmInfo.release.date, 'YYYY') - getDate(filmA.filmInfo.release.date, 'YYYY');
 
-const sortByRating = (filmA, filmB) => filmB.filmInfo.totalRating - filmA.filmInfo.totalRating;
+const sortRating = (filmA, filmB) => filmB.filmInfo.totalRating - filmA.filmInfo.totalRating;
 
-
-export {getDate, getCorrectWord, getRandomInteger, getAnyRandomNumber, getArrayRandomLength, generateDate, getOneRandomArrayElem, generateBoolean, createIdGenerator, onEscKeyDown, updateItem, sortByDate, sortByRating};
+export {getDate, getCorrectWord, getRandomInteger, getAnyRandomNumber, getArrayRandomLength, generateDate, getOneRandomArrayElem, generateBoolean, createIdGenerator, updateItem, sortDate, sortRating};

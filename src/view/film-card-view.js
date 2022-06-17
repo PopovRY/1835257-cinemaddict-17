@@ -1,6 +1,6 @@
 //Карточка фильма (в списке)
 
-import {getCorrectWord, getDate} from '../utils.js';
+import {getCorrectWord, getDate} from '../utils/utils.js';
 import AbstractView from '../framework/view/abstract-view.js';
 
 const createFilmCardTemplate = (film) => {
