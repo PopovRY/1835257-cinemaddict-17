@@ -2,6 +2,7 @@ import FilmCardView from '../view/film-card-view.js';
 import FilmPopupView from '../view/film-popup-view.js';
 import {comments} from '../mock/structures.js';
 import {remove, render, replace} from '../framework/render.js';
+import {UpdateType, UserAction} from '../const.js';
 
 export default class MoviePresenter {
   #film = null;
@@ -83,14 +84,23 @@ export default class MoviePresenter {
   };
 
   #handleWatchlistClick = () => {
-    this.#changeData({...this.#film, 'userDetails': {...this.#film.userDetails,'watchlist' : !this.#film.userDetails.watchlist}});
+    this.#changeData(
+      UserAction.UPDATE_FILM,
+      UpdateType.MINOR,
+      {...this.#film, 'userDetails': {...this.#film.userDetails,'watchlist' : !this.#film.userDetails.watchlist}});
   };
 
   #handleHistoryClick = () => {
-    this.#changeData({...this.#film, 'userDetails': {...this.#film.userDetails,'alreadyWatched': !this.#film.userDetails.alreadyWatched}});
+    this.#changeData(
+      UserAction.UPDATE_FILM,
+      UpdateType.MINOR,
+      {...this.#film, 'userDetails': {...this.#film.userDetails,'alreadyWatched': !this.#film.userDetails.alreadyWatched}});
   };
 
   #handleFavoriteClick = () => {
-    this.#changeData({...this.#film, 'userDetails': {...this.#film.userDetails,'favorite': !this.#film.userDetails.favorite}});
+    this.#changeData(
+      UserAction.UPDATE_FILM,
+      UpdateType.MINOR,
+      {...this.#film, 'userDetails': {...this.#film.userDetails,'favorite': !this.#film.userDetails.favorite}});
   };
 }
