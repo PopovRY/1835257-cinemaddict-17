@@ -10,13 +10,13 @@ import HeadingFilmList from '../view/heading-film-list-view.js';
 import MoviePresenter from './movie-presenter.js';
 import {sortDate, sortRating} from '../utils/utils.js';
 import {SortType, UpdateType, UserAction} from '../const.js';
+import ShowMoreButtonView from '../view/more-button-view.js';
 
 
 export default class MovieListPresenter {
   #container = null;
   #filmsModel = null;
   #sortComponent = null;
-  #showMoreButtonComponent = null;
 
   #filmComponent = new FilmsSectionView();
   #filmListComponent = new FilmListView();
@@ -25,10 +25,12 @@ export default class MovieListPresenter {
   #filmsListExtraCommentedComponent = new FilmsListExtraView('Most commented');
   #filmTopRateComponent = new FilmTopView();
   #filmMostCommentedComponent = new FilmTopView();
+  #showMoreButtonComponent = new ShowMoreButtonView();
   #moviePresenter = new Map();
   #currentSortType = SortType.DEFAULT;
 
   #renderedFilmCount = FILM_CARD_COUNT;
+  #films = [];
 
   constructor(container, filmsModel) {
     this.#container = container;
@@ -68,7 +70,7 @@ export default class MovieListPresenter {
   };
 
   #renderHeadingFilmList= () => {
-    const headingFilmListComponent = new HeadingFilmList();
+    const headingFilmListComponent = new HeadingFilmList(this.#films);
     render(headingFilmListComponent, document.querySelector('.films-list'));
   };
 
@@ -83,7 +85,7 @@ export default class MovieListPresenter {
     render(this.#filmContainerComponent, document.querySelector('.films-list'));
 
 
-    this.#renderHeadingFilmList();
+    this.#renderHeadingFilmList(films);
 
     this.#renderFilms(films.slice(0, this.#renderedFilmCount));
 

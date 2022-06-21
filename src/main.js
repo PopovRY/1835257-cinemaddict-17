@@ -4,7 +4,7 @@ import FilmsCountView from './view/films-count-view.js';
 import MainNavigationItemView from './view/main-navigation-item-view.js';
 import {render} from './framework/render.js';
 import MovieListPresenter from './presenter/movie-list-presenter.js';
-import FilmsModel from './model/model.js';
+import FilmsModel from './model/film-model.js';
 
 export const FILM_CARD_COUNT = 5;
 
